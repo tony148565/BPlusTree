@@ -8,9 +8,10 @@ class Bplustree:
         self.branch = branching_factor
         self.leave = Leaf(None, None, None, self.branch)  # first leaf
         self.root = self.leave
+        self.dicts = {}
 
     def get(self, key):
-        # print(self.root)
+        print(key)
         return self.root.get(key)
 
     def remove_item(self, key):
@@ -22,6 +23,14 @@ class Bplustree:
         self.root.sett(key, value)
         if self.root.parent is not None:  # not root
             self.root = self.root.parent
+
+    def insert(self, key, value):
+        if key[0] in self.dicts:
+            self.dicts[key[0]].append(value)
+        else:
+            self.dicts[key[0]] = []
+            self.dicts[key[0]].append(value)
+        #print(self.dicts)
 
     def size(self):
         result = 0
@@ -58,4 +67,24 @@ class Bplustree:
             curr = curr.children[0]
             newer = newer.children[-1]
         return tree
+
+    def merge_data(self, lists, a, b):  # merge same studentID or CourseID
+        for i in lists:
+            # ll=[]
+            # ll.append(i[0])
+            print(i[a], ",", i[b], "\n")
+            if i[a] in self.dicts:
+                print("in")
+                self.dicts[i[a]].append(i[b])
+            else:
+                print("new")
+                self.dicts[i[a]] = []
+                self.dicts[i[a]].append(i[b])
+        print(self.dicts)
+        return self.dicts
+
+
+
+
+
 
