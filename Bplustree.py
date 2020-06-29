@@ -9,6 +9,7 @@ class Bplustree:
         self.leave = Leaf(None, None, None, self.branch)  # first leaf
         self.root = self.leave
         self.dicts = {}
+        self.course_name = {}
 
     def get(self, key):
         print(key)
@@ -25,12 +26,12 @@ class Bplustree:
             self.root = self.root.parent
 
     def insert(self, key, value):
-        if key[0] in self.dicts:
-            self.dicts[key[0]].append(value)
+        if key in self.dicts:
+            self.dicts[key].append(value)
         else:
-            self.dicts[key[0]] = []
-            self.dicts[key[0]].append(value)
-        #print(self.dicts)
+            self.dicts[key] = []
+            self.dicts[key].append(value)
+        print(self.dicts)
 
     def size(self):
         result = 0
@@ -72,15 +73,15 @@ class Bplustree:
         for i in lists:
             # ll=[]
             # ll.append(i[0])
-            print(i[a], ",", i[b], "\n")
+            # print(i[a], ",", i[b], "\n")
             if i[a] in self.dicts:
-                print("in")
+                # print("in")
                 self.dicts[i[a]].append(i[b])
             else:
-                print("new")
+                # print("new")
                 self.dicts[i[a]] = []
                 self.dicts[i[a]].append(i[b])
-        print(self.dicts)
+        # print(self.dicts)
         return self.dicts
 
 
