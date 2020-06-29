@@ -23,6 +23,7 @@ class Leaf:  # define leaf class
                 self.split(math.ceil(self.branch / 2))
 
     def get(self, key):
+        print(self.keys)
         index = self.keys.index(key)
         return self.children[index]
 
@@ -87,6 +88,7 @@ class Node:
         self.children[i+1].sett(key, value)
 
     def get(self, key):  #
+        print(self.keys)
         for i, k in enumerate(self.keys):   # i can get index and k can get value
             # print(self.children[i].children)
             if key < k:  # return value
