@@ -136,7 +136,7 @@ class Node:
     def remove_item(self, key):
         for i, k in enumerate(self.keys):
             if k >= key:
-                self.children[i].remove_itrm(k)
+                self.children[i].remove_item(k)
                 return
         return self.children[-1].remove_item(key)
 
