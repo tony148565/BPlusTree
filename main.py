@@ -11,15 +11,21 @@ def build(a, b):
         lists = list(csv_reader)
     csvFile.close()
     lists.remove(lists[0])
-    #print(lists)
+    # print(lists)
     new_tree = Bplustree()
     dicts = new_tree.merge_data(lists, a, b)
+    for k in lists:
+        if k[1] in new_tree.course_name:
+            continue
+        else:
+            new_tree.course_name[k[1]] = k[2]
     for i in dicts:
-        print(i)
-        print(dicts[i])
+        # print(i)
+        # print(dicts[i])
         ll=[]
         ll.append(str(i))
         new_tree.sett(ll, dicts[i])
+    print(new_tree.course_name)
     return new_tree
 
 # print(dicts)
@@ -58,20 +64,36 @@ while True:
         value = input()
         ll = []
         ll.append(key)
-        tree.sett(ll, value)  # set data to B+tree
+        # li = []
+        # li.append(value)
+        # set data to B+tree
+        if value not in tree.course_name:
+            print("this course is new course")
+            print("please type the course name")
+            new_course = input()
+            tree.course_name[value] = new_course
         tree.insert(key, value)  # add data to dicts
+        tree.sett(ll, tree.dicts[key])
     elif choose == "2":
         key = input()
-        ll =[]
+        ll = []
         ll.append(key)
         print("Delete ", key, "all data?(y/n)")
         scan = input().upper()
         if scan == "Y":
-            tree.remove_item(ll)  # remove item in B+tree
+            try:
+                tree.remove_item(ll)  # remove item in B+tree
+                if aa == 2:
+                    print("Do you want to remove this course", key, "(y/n)?")
+                    sc = input()
+                    if sc == "y":
+                        del tree.course_name[key]
+            except ValueError:
+                print(key, "is not in list")
         elif scan == "N":
-            print("input:")
+            print("type studentID or CourseID:")
             value = input()
-            # print(type(tree.dicts[key]))
+            print(type(tree.dicts[key]))
             tree.dicts[key].remove(value)  # remove data in dicts
         else:
             print("incorrect command!!!")
@@ -90,16 +112,17 @@ while True:
     elif choose == "6":
         break
     elif choose == "5":
-        print("search")
+        print("type studentID or CourseID")
         ins = str(input())
         ser = []
         ser.append(ins)
         try:
             lisss = tree.get(ser)
             print(lisss)
+            for i in lisss:
+                print(i, " ", tree.course_name[i])
         except ValueError:
             print(ins, "is not in list")
-
     else:
         print("incorrect command!!!")
 
